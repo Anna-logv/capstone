@@ -7,15 +7,15 @@ import Footer from './Footer';
 function App() {
   return (
     <>
-    <header>
+     <header>
       <Header/>
-    </header>
+    </header> 
     <main>
       <Main/>
     </main>
     <footer>
       <Footer/>
-    </footer>
+    </footer> 
     </>
   );
 }

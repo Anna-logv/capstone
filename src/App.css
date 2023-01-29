@@ -6,11 +6,11 @@
 body {
   background-color: #ffffff;
   font-family:'Karla';
-  font-size: 16pt;
+  font-size: 14pt;
   text-align: center;
 }
 h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-family:'Markazi Text';
   font-weight: normal;
   padding: 0 0 0.5rem 0;
@@ -96,9 +96,9 @@ header {
 header > .main-block > img {
   display: block;
   width: 220px;
-
-  margin:  auto 0 auto 0;
+  margin:  1rem auto 0 auto;
 }
+
 header nav {
   padding:2.2rem; 
 }
@@ -107,6 +107,7 @@ header .main-block {
   display: grid;
   grid-template-columns: auto 1fr
 }
+
 header nav ul {
   list-style: none;
   text-align: right;
@@ -118,8 +119,18 @@ header nav li {
   font-size: 1.1rem;
   font-weight: 600;
 }
-header nav li:nth-last-child(1) {
-  padding-right: 0;
+
+@media (max-width:890px) {
+  header .main-block {
+    grid-template-columns:  1fr;
+    align-items: center;
+  }
+  header nav ul {
+    text-align: center;   
+  }
+  header nav {
+    padding:1rem; 
+  }
 }
 header nav a, header nav a:link, header nav a:active, header nav a:visited {
   display: inline-block;
@@ -140,11 +151,14 @@ main {
 
 .main-block {
   margin: 0 auto 0 auto;
-  min-width: 500px;
+  min-width: 300px;
   max-width: 900px;
-  width: 100%;
-}
+  width: 95%;
 
+}
+.main-block-helper {
+  padding: 0 1rem 0 1rem;
+}
 footer {
   grid-area: footer; 
   margin-top: 2rem;
@@ -159,6 +173,11 @@ footer > .main-block {
   justify-items: start;
   align-items: start;
   gap: 1rem;
+}
+@media (max-width:450px) {
+  footer > .main-block {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 footer > .main-block > img {
   display: block;
@@ -215,6 +234,7 @@ a.button, a.button:link, a.button:active, a.button:visited, a.button:hover {
   font-weight: 600;
   padding: 1rem 2rem;
   box-shadow: 0.2em 0.2em 0.2em rgba(0,0,0,0.2);
+  text-align: center;
 }
 a.button:hover {
   display: inline-block;
@@ -225,8 +245,8 @@ a.button:hover {
 }
 #hero_pic {
   position: absolute;
-  right: 0px;
-  top:30px;
+  right: 1rem;
+  top:2rem;
   width: 40%; 
   height: 130%; 
   border-radius: 16px;
@@ -240,13 +260,26 @@ a.button:hover {
 }
 
 #specials_block .title { 
-  padding: 8rem 0 1rem 0;
+  margin-top: 7.5rem;
+  padding: 1rem 0 1rem 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
+@media (max-width:550px) {
+  #hero_pic {
+    display: none;
+  }
+  #hero_block p  {
+    width:80%;
+  }
+  #specials_block .title { 
+    margin-top: 1.5rem;
+  }
+}
 #specials_block  div.title  div{
-  padding-top: 1rem;
+  justify-self: center;
+  align-self: center;
 }
 
 .specials-list {
@@ -258,7 +291,7 @@ a.button:hover {
 }
 .specials-item {
   flex: 1 0 30%;
- 
+  min-width: 200px;
   background-color: #EDEFEE;
   border-radius: 16px;
   overflow: hidden;
@@ -324,7 +357,7 @@ a.a-delivery::after {
 
 #testimonials_block {
   background-color: #EDEFEE;
-  padding: 7rem 0rem;
+  padding: 5rem 0 7rem 0rem;
   margin-top: 3rem;
   text-align: center;
 }
@@ -380,7 +413,36 @@ a.a-delivery::after {
   grid-area: special-txt;
   padding-top: 1rem;
   color: #6E6F6E;
-  
 }
-
-
+#about_block{
+  display: flex;
+  flex-flow: row wrap;
+  gap: 40px;
+  text-align: right;
+}
+#about_block > div {
+  padding: 5rem 0 4rem 0;
+  flex: 1 0 40%;
+  text-align: left;
+}
+.b-about-img {
+    position: relative;
+    flex: 1 0 40%;
+}
+.b-about-img img:nth-child(1){
+  position: absolute;
+  width: 50%;
+  right: 7rem;
+  top: 9rem;
+}
+.b-about-img img:nth-child(2){
+  position: absolute;
+  width: 50%;
+  right: 0;
+  top: 3rem;
+}
+@media (max-width:550px) {
+  .b-about-img {
+    display: none;
+  }
+}
