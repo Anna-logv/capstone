@@ -5,7 +5,8 @@ import lemon_dessert from './assets/lemon_dessert.jpg';
 function Main() {
     return (
       <>
-      <div id="hero_block">
+
+      <section id="hero_block">
         <div class="main-block">
           <h1>Little Lemon</h1>
           <h2>Chicago</h2>
@@ -17,10 +18,10 @@ function Main() {
           </p>
           <div id="hero_pic"><img src={restauranfood} alt="Little Lemon"/></div>
         </div>
-      </div>
+      </section>
 
 
-      <div id="specials_block" class="main-block">
+      <section id="specials_block" class="main-block">
 
         <div class="title">
           <h1>This week specials!</h1>
@@ -29,7 +30,7 @@ function Main() {
 
         <div class="specials-list">
 
-          <div class="specials-item">
+          <article class="specials-item">
             <img src={greek_salad} alt="Greek salad"/>
             <div class="header">Greek salad</div>
             <div class="price">$12.28</div>
@@ -39,9 +40,9 @@ function Main() {
             <div class="link">
               <a href="#" class="a-delivery">Order a delivery</a>
             </div>
-          </div>
+          </article>
 
-          <div class="specials-item">
+          <article class="specials-item">
             <img src={bruchetta} alt="Bruchetta"/>
             <div class="header">Bruchetta</div>
             <div class="price">$9.13</div>
@@ -51,9 +52,9 @@ function Main() {
             <div class="link">
             <a href="#" class="a-delivery">Order a delivery</a>
             </div>
-          </div>
+          </article>
 
-          <div class="specials-item">
+          <article class="specials-item">
             <img src={lemon_dessert} alt="Lemon Dessert"/>
             <div class="header">Lemon Dessert</div>
             <div class="price">$5.20</div>
@@ -63,10 +64,10 @@ function Main() {
             <div class="link">
             <a href="#" class="a-delivery">Order a delivery</a>
             </div>
-          </div>
+          </article>
 
         </div>
-      </div>
+      </section>
 
       </>
 

@@ -14,14 +14,46 @@ h1 {
   font-family:'Markazi Text';
   font-weight: normal;
   padding: 0 0 0.5rem 0;
-  color: #black;
+  color: black;
 }
 h2 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-family:'Markazi Text';
   font-weight: normal;
   padding: 0 0 0.5rem 0;
   color: black;
+}
+h3 {
+  font-size: 1.3rem;
+  font-family:'Karla';
+  font-weight: bold;
+  padding: 0 0 0.5rem 0;
+  color: black;
+  text-transform: uppercase;
+}
+h4 {
+  font-size: 1.3rem;
+  font-family:'Karla';
+  font-weight: 800;
+  padding: 0 0 0.5rem 0;
+  color: #495E57;
+}
+
+h5 {
+  font-size: 1.1rem;
+  font-family:'Karla';
+  font-weight: bold;
+  padding: 0 0 0.5rem 0;
+  color: black;
+}
+
+
+h6 {
+  font-size: 1rem;
+  font-family:'Karla';
+  font-weight: bold;
+  padding: 0 0 0.5rem 0;
+  color: #495E57;
 }
 img {
   border:0;
@@ -30,12 +62,10 @@ img {
 a, a:link {
   text-decoration: underline;
   color:#EE9972;
-  
 }
 a:visited {
   text-decoration: underline;
   color:#EE9972;
-  
 }
 a:hover {
   text-decoration: none;
@@ -48,8 +78,10 @@ a:active {
 p {
   padding:0 0 1rem 0;
 }
+span {
+  display: inline;
+}
 #root {
- 
   display: grid;
   grid-template-areas: "head" 
                        "main"
@@ -57,7 +89,6 @@ p {
   grid-template-rows: auto 1fr auto; 
   min-height: 100vh;
   text-align: left;
- 
 }
 header {
   grid-area: head; 
