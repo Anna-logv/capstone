@@ -1,9 +1,11 @@
-import Logo from './Logo.svg';
+import Logo from './assets/Logo.svg';
+import Nav from './Nav';
 function Header() {
     return (
-        <>
-        <img src={Logo} alt="Little Lemon"/>
-        </>
+        <div class="main-block">
+            <img src={Logo} alt="Little Lemon"/>
+            <nav><Nav/></nav>
+        </div>
     );
   }
   

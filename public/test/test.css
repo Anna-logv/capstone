@@ -1,0 +1,36 @@
+* {
+  margin:0;
+  padding:0;
+  color: black;
+}
+body {
+  background-color: #ffffff;
+  font-family:'Courier New', Courier, monospace;
+  margin: 0 5% 0 5%;
+  display: grid;
+  grid-template-areas: "head nav" 
+                       "main main"
+                       "footer footer"; 
+  grid-template-rows: auto 1fr auto; 
+  min-height: 100vh;
+}
+
+
+header {
+  grid-area: head; 
+  min-width: 250px;
+  padding-top: 2rem;
+
+}
+nav {
+  grid-area: nav; 
+
+}
+main {
+  grid-area: main; 
+
+}
+footer {
+  grid-area: footer; 
+
+}
