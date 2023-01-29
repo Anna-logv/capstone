@@ -2,6 +2,7 @@ import restauranfood from './assets/restauranfood.jpg';
 import bruchetta from './assets/bruchetta.jpg';
 import greek_salad from './assets/greek_salad.jpg';
 import lemon_dessert from './assets/lemon_dessert.jpg';
+import test_pic from './assets/test_pic.png';
 function Main() {
     return (
       <>
@@ -68,7 +69,64 @@ function Main() {
 
         </div>
       </section>
+      <section  id="testimonials_block">
+        <div class="main-block">
+          <h2>Testimonisls</h2>
+          <div class="testimonials-list">
 
+            <article class="testimonials-item">
+              <div class="rating">
+                <span></span><span></span><span></span><span></span><span class="no"></span>
+              </div>
+              <img src={test_pic} alt="Sara Lopez"/>
+              <div  class="person">
+                <div class="name">Sara Lopez</div>
+                <div class="nickname">Sara72</div>
+              </div>
+              <div class="txt">“Seriously cannot stop thinking about the Turkish Mac n’ Cheese!!”</div>
+            </article>
+
+
+            <article class="testimonials-item">
+              <div class="rating">
+                <span></span><span></span><span></span><span></span><span class="no"></span>
+              </div>
+              <img src={test_pic} alt="Sara Lopez"/>
+              <div  class="person">
+                <div class="name">Sara Lopez</div>
+                <div class="nickname">Sara72</div>
+              </div>
+              <div class="txt">“Seriously cannot stop thinking about the Turkish Mac n’ Cheese!!”</div>
+            </article>
+
+            
+            <article class="testimonials-item">
+              <div class="rating">
+                <span></span><span></span><span></span><span></span><span class="no"></span>
+              </div>
+              <img src={test_pic} alt="Sara Lopez"/>
+              <div  class="person">
+                <div class="name">Sara Lopez</div>
+                <div class="nickname">Sara72</div>
+              </div>
+              <div class="txt">“Seriously cannot stop thinking about the Turkish Mac n’ Cheese!!”</div>
+            </article>
+
+            
+            <article class="testimonials-item">
+              <div class="rating">
+                <span></span><span></span><span></span><span></span><span class="no"></span>
+              </div>
+              <img src={test_pic} alt="Sara Lopez"/>
+              <div  class="person">
+                <div class="name">Sara Lopez</div>
+                <div>Sara72</div>
+              </div>
+              <div class="txt">“Seriously cannot stop thinking about the Turkish Mac n’ Cheese!!”</div>
+            </article>
+          </div>
+        </div>
+      </section>
       </>
 
     );
