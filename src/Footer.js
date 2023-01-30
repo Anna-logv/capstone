@@ -1,29 +1,29 @@
 
 import Logo from './assets/Logo.svg';
-
+import { Link } from 'react-router-dom';
 function Footer() {
     return (
-      <div  class="main-block">
+      <div  className="main-block">
       <img src={Logo} alt="Little Lemon"/>
       <nav>
         <ul>
             <li>
-                <a href="#">Home</a>
+                <Link to="/">Home</Link>
             </li>
             <li>
-                <a href="#">About</a>
+                <Link to="/about">About</Link>
             </li>
             <li>
-                <a href="#">Menu</a>
+                <Link to="/menu">Menu</Link>
             </li>
             <li>
-                <a href="#">Reservations</a>
+                <Link to href="/booking">Reservations</Link>
             </li>
             <li>
-                <a href="#">Order Online</a>
+                <Link to="/order-online">Order Online</Link>
             </li>
             <li>
-                <a href="#">Login</a>
+                <Link to="/login">Login</Link>
             </li>
         </ul>
       </nav>
@@ -35,16 +35,16 @@ function Footer() {
       </div>
       <ul>
         <li>
-            <a href="#">Facebook</a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
         </li>
         <li>
-            <a href="#">Instagram</a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
         </li>
         <li>
-            <a href="#">Twitter</a>
+            <a href="https://twitter.com/" target="_blank" rel="noreferrer">Twitter</a>
         </li>
         <li>
-            <a href="#">YOutube</a>
+            <a href="https://www.youtube.com/"  target="_blank" rel="noreferrer">Youtube</a>
         </li>
       </ul>
       </div>
