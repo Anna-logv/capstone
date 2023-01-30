@@ -1,10 +1,10 @@
 
-import Logo from './assets/Logo.svg';
+import Logo from '../assets/Logo.svg';
 import { Link } from 'react-router-dom';
 function Footer() {
     return (
       <div  className="main-block">
-      <img src={Logo} alt="Little Lemon"/>
+      <Link to="/"><img src={Logo} alt="Little Lemon"/></Link>
       <nav>
         <ul>
             <li>

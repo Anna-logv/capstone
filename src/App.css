@@ -93,12 +93,14 @@ span {
 header {
   grid-area: head; 
 }
-header > .main-block > img {
+header > .main-block > a  {
   display: block;
-  width: 220px;
+  
   margin:  1rem auto 0 auto;
 }
-
+header > .main-block > a >img {
+  width: 220px;
+}
 header nav {
   padding:2.2rem; 
 }
@@ -166,6 +168,7 @@ footer {
   padding: 2rem 0 2rem 0;
   background: #EDEFEE;
 
+
 }
 footer > .main-block {
   display: grid;
@@ -179,9 +182,12 @@ footer > .main-block {
     grid-template-columns: 1fr 1fr;
   }
 }
-footer > .main-block > img {
+footer > .main-block > a {
   display: block;
   margin:  auto 0 auto 0;
+}
+footer > .main-block > a >img {
+  width:148px;
 }
 footer  ul {
   list-style: none;
