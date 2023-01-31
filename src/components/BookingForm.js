@@ -1,21 +1,12 @@
 import {useState} from 'react';
-
-function BookingForm() {
-    const availableTimes = [
-        {time: "17:00", free:true},
-        {time:"18:00", free:true},
-        {time:"19:00", free:true},
-        {time:"20:00", free:true},
-        {time:"21:00", free:true},
-        {time:"22:00", free:true}
-    ];
+import { useBookingContext} from '../contexts/bookingContext';
+function BookingForm(props) {
+    const { availableTime,setAvailableTime } = useBookingContext();
     const [date, setDate] = useState({value:"", touched:false});
     const [time, setTime] = useState({value:"", touched:false});
     const [guests, setGuests] = useState({value:"", touched:false});
     const [occasion, setOccasion] = useState({value:"", touched:false});
 
-    const [bookings, setBookings] = useState(availableTimes);
-    
     const getIsFormValid = () => {
        // return true;
         return (
@@ -28,15 +19,7 @@ function BookingForm() {
       };
       const handleSubmit = (e) => { 
         e.preventDefault(); 
-        let new_bookings=[];
-        
-        bookings.map((t,i)=>{
-            if (t.time===time.value) t.free=false;
-            new_bookings.push(t);
-        });
-        
-        setBookings(new_bookings);
-       
+        setAvailableTime(time.value);
         alert("Done"); 
         return;
       };
@@ -54,23 +37,23 @@ function BookingForm() {
                 </span>
         </label>
         <label>
-                <span  className="s-label">Choose time</span>
+                <span  className="s-label">Choose time{time.value}</span>
                 <span className="s-input">
                 <select  
-                    value={time.value} 
-                    onChange={(e)=>setTime({...time, value:e.target.value})}
-                    onBlur={(e)=>setTime({...time, touched:true})}
+                            value={time.value} 
+                            onChange={(e)=>setTime({...time, value:e.target.value})}
+                            onBlur={(e)=>setTime({...time, touched:true})}
                 >
                     <option value="" key="0">---Select time---</option>
                     {
-                        bookings.map((t,index)=>{
+                        availableTime.map((t,index)=>{
                             return (
                                 t.free && <option value={t.time} key={index+1}>{t.time}</option>
                             )
                         })
                     }
                 </select>
-                {time.touched && time.value === '' && <span className='s-error'>Select time</span> } 
+                {time.touched && time.value.toString() === '' && <span className='s-error'>Select time</span> } 
                 </span>
         </label>
         <label>
@@ -86,7 +69,7 @@ function BookingForm() {
                 </span>
         </label>
         <label>
-                <span className="s-label">Occasion</span>
+                <span className="s-label">Occasion {occasion.value}</span>
                 <span className="s-input">
                 <select 
                     value={occasion.value} 

@@ -1,9 +1,12 @@
 import BookingForm from "./components/BookingForm"
-function BookingPage() {
+
+function BookingPage(props) {
     return (
       <div  className="main-block">
         <h1>Reserve a table</h1>
-        <BookingForm/>
+        
+          <BookingForm />
+
       </div>
     );
   }
