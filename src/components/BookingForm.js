@@ -2,18 +2,20 @@ import {useState} from 'react';
 
 function BookingForm() {
     const availableTimes = [
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
+        {time: "17:00", free:true},
+        {time:"18:00", free:true},
+        {time:"19:00", free:true},
+        {time:"20:00", free:true},
+        {time:"21:00", free:true},
+        {time:"22:00", free:true}
     ];
     const [date, setDate] = useState({value:"", touched:false});
-    const [time, setTime] = useState({value:availableTimes[0], touched:false});
+    const [time, setTime] = useState({value:"", touched:false});
     const [guests, setGuests] = useState({value:"", touched:false});
     const [occasion, setOccasion] = useState({value:"", touched:false});
 
+    const [bookings, setBookings] = useState(availableTimes);
+    
     const getIsFormValid = () => {
        // return true;
         return (
@@ -26,7 +28,17 @@ function BookingForm() {
       };
       const handleSubmit = (e) => { 
         e.preventDefault(); 
+        let new_bookings=[];
+        
+        bookings.map((t,i)=>{
+            if (t.time===time.value) t.free=false;
+            new_bookings.push(t);
+        });
+        
+        setBookings(new_bookings);
+       
         alert("Done"); 
+        return;
       };
     return (
         <form method='post' id='form_booking' onSubmit={handleSubmit}>
@@ -49,10 +61,11 @@ function BookingForm() {
                     onChange={(e)=>setTime({...time, value:e.target.value})}
                     onBlur={(e)=>setTime({...time, touched:true})}
                 >
+                    <option value="" key="0">---Select time---</option>
                     {
-                        availableTimes.map((t,index)=>{
+                        bookings.map((t,index)=>{
                             return (
-                            <option value={t} key={index}>{t}</option>
+                                t.free && <option value={t.time} key={index+1}>{t.time}</option>
                             )
                         })
                     }
@@ -69,7 +82,7 @@ function BookingForm() {
                     onChange={(e)=>setGuests({...guests, value:e.target.value})}
                     onBlur={(e)=>setGuests({...guests, touched:true})}
                 />
-                {guests.touched && guests.value === '' && <span className='s-error'>Mast be from 1 to 10</span> } 
+                {guests.touched && (Number(guests.value)<=0 || Number(guests.value)>10) && <span className='s-error'>Mast be from 1 to 10</span> } 
                 </span>
         </label>
         <label>
