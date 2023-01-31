@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { useBookingContext} from '../contexts/bookingContext';
-function BookingForm(props) {
+function BookingForm() {
     const { availableTime,setAvailableTime } = useBookingContext();
     const [date, setDate] = useState({value:"", touched:false});
     const [time, setTime] = useState({value:"", touched:false});
@@ -8,7 +8,6 @@ function BookingForm(props) {
     const [occasion, setOccasion] = useState({value:"", touched:false});
 
     const getIsFormValid = () => {
-       // return true;
         return (
             date.value.toString()!=='' &&
             time.value.toString()!=='' &&
@@ -20,7 +19,7 @@ function BookingForm(props) {
       const handleSubmit = (e) => { 
         e.preventDefault(); 
         setAvailableTime(time.value);
-        alert("Done"); 
+       // alert("Done"); 
         return;
       };
     return (
@@ -37,7 +36,7 @@ function BookingForm(props) {
                 </span>
         </label>
         <label>
-                <span  className="s-label">Choose time{time.value}</span>
+                <span  className="s-label">Choose time</span>
                 <span className="s-input">
                 <select  
                             value={time.value} 
@@ -85,7 +84,7 @@ function BookingForm(props) {
         </label>
 
         <div>
-        <button type="submit" disabled={!getIsFormValid()} className="button">Make Your reservation</button>
+        <button type="submit" disabled={!getIsFormValid()} className="button">Book Now</button>
         </div>
         </form>
 

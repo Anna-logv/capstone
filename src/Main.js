@@ -5,12 +5,12 @@ import { BookingProvider} from './contexts/bookingContext';
 function Main() {
 
   return (
-    <BookingProvider>
-  <Routes> 
-    <Route path="/" element={<HomePage/>}></Route>
-    <Route path="/booking" element={<BookingPage/>}></Route>
-    <Route path="*" element={<HomePage/>}></Route>
- </Routes>
+  <BookingProvider>
+    <Routes> 
+      <Route path="/" element={<HomePage/>}></Route>
+      <Route path="/booking" element={<BookingPage/>}></Route>
+      <Route path="*" element={<HomePage/>}></Route>
+  </Routes>
  </BookingProvider>
   );
 }

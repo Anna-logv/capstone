@@ -239,7 +239,7 @@ a.button, a.button:link, a.button:active, a.button:visited, a.button:hover, butt
   border-radius: 5px;
   font-size: 1.2rem;
   font-weight: 600;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   box-shadow: 0.2em 0.2em 0.2em rgba(0,0,0,0.2);
   text-align: center;
   cursor: pointer;

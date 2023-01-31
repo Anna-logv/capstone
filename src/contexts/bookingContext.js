@@ -4,14 +4,11 @@ const BookingContext = createContext(undefined);
 
 export const BookingProvider=({children}) => {
     function initializeTimes (){
-        return [
-          {time:"17:00", free:true},
-          {time:"18:00", free:true},
-          {time:"19:00", free:true},
-          {time:"20:00", free:true},
-          {time:"21:00", free:true},
-          {time:"22:00", free:true}
-      ]
+        const times_array=[];
+        for (let i=17; i<=22; i++) {
+            times_array.push( {time: i+":00", free:true});
+        }
+        return times_array;
       }
       function updateTimes(state, used){
         return state.map((t)=>{
