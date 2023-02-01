@@ -4,7 +4,6 @@ import { BookingProvider} from './contexts/bookingContext';
 import { act } from 'react-dom/test-utils';
 
 test('Test1 [static text)] : Renders the BookingForm button (text inside button tag)', async () => {
-  //render(<BookingForm />);
   act(() => {
     render(
       <BookingProvider>
@@ -17,8 +16,6 @@ test('Test1 [static text)] : Renders the BookingForm button (text inside button 
 });
 
 test('Test2 [initializeTimes] List of available times returns the correct expected value)', async () => {
-  
-  //const testTimeValue="18:00";
 
   await act(() => {
     render(
@@ -55,13 +52,13 @@ test('Test3 [updateTimes] Returns the same value that is provided in the state)'
     return today.toISOString().split('T')[0];
   };
   await act(() => {
-    render(
-      <BookingProvider>
-        <BookingPage/>
-      </BookingProvider>
-      );
+      render(
+        <BookingProvider>
+          <BookingPage/>
+        </BookingProvider>
+        );
 
-    })
+   })
   const dateInput=screen.getByLabelText(/Choose date/);
   //const inputTime=screen.getByLabelText(/Choose time/);
   await act(() => {
@@ -76,14 +73,11 @@ test('Test3 [updateTimes] Returns the same value that is provided in the state)'
 
   const testTimeValue1_2=screen.getByLabelText(/Choose time/).textContent;
 
-  //expect(testTimeValue1_1).not.toBe(testTimeValue1_2);
   await act(() => {
   fireEvent.change(dateInput,{target:{value:tomorrow()}});
 
   });
   const testTimeValue1_3=screen.getByLabelText(/Choose time/).textContent;
   expect( testTimeValue1_1).toBe(testTimeValue1_3);
-
-
 });
 

@@ -13,7 +13,7 @@ function BookingForm(props) {
         return yyyy + '-' + mm + '-' + dd;
             //   return mm + '/' + dd + '/' +yyyy ;
        }
-       const { availableTime } = useBookingContext();
+       const { availableTime, setAvailableTime } = useBookingContext();
 
        const formik = useFormik({
         initialValues: {
@@ -23,7 +23,8 @@ function BookingForm(props) {
         occasion: '',
       },
       validationSchema: Yup.object({
-        date: Yup.string()
+        date: Yup.date()
+            .min(today(),'Select today or later')
             .required('Select date'),
         time: Yup.string()
             .required('Select time'),
@@ -47,12 +48,16 @@ function BookingForm(props) {
 
                 <span className={(formik.touched.date && formik.errors.date) ? 's-input s-input-error' : 's-input'}>
                     <input type="date"  data-testid="booking-date" data-date-format="DD-YYYY-MM"
-                        onChange={formik.handleChange}
+                        onChange={ (e) => {
+                                setAvailableTime({type:'refresh', value:formik.values.date});
+                                formik.handleChange(e);
+                              }
+                        }
                         onBlur={formik.handleBlur}
                         value={formik.values.date}
                         id="date"
                     />
-                    <span className='s-error'>Select date</span>
+                    <span className='s-error'>{formik.errors.date}</span>
                 </span>
         </label>
         <label>
@@ -74,7 +79,7 @@ function BookingForm(props) {
                         })
                     }
                 </select>
-                <span className='s-error'>Select time</span>
+                <span className='s-error'>{formik.errors.time}</span>
                 </span>
         </label>
         <label>
@@ -87,7 +92,7 @@ function BookingForm(props) {
                     value={formik.values.guests}
                     id="guests"
                 />
-                <span className='s-error'>Mast be from 1 to 10</span>
+                <span className='s-error'>{formik.errors.guests}</span>
                 </span>
         </label>
         <label>
@@ -103,7 +108,7 @@ function BookingForm(props) {
                     <option value="Birthday">Birthday</option>
                     <option value="Anniversary">Anniversary</option>
                 </select>
-                <span className='s-error'>Select occasion</span> 
+                <span className='s-error'>{formik.errors.occasion}</span> 
                 </span>
         </label>
 
