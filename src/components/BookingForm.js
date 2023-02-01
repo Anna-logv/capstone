@@ -1,12 +1,35 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import { useBookingContext} from '../contexts/bookingContext';
-function BookingForm() {
-    const { availableTime,setAvailableTime } = useBookingContext();
-    const [date, setDate] = useState({value:"", touched:false});
+function BookingForm(props) {
+
+
+      function today() {
+        const date = new Date();
+        let dd = date.getDate();
+               var mm = date.getMonth() + 1; //January is 0!
+               var yyyy = date.getFullYear();
+               if (dd < 10) {
+                 dd = '0' + dd;
+               }
+               if (mm < 10) {
+                 mm = '0' + mm;
+               }
+               return yyyy + '-' + mm + '-' + dd;
+                 //   return mm + '/' + dd + '/' +yyyy ;
+       }
+
+
+    const { availableTime, setAvailableTime } = useBookingContext();
+
+    const [date, setDate] = useState({value:today(), touched:false});
     const [time, setTime] = useState({value:"", touched:false});
     const [guests, setGuests] = useState({value:"", touched:false});
     const [occasion, setOccasion] = useState({value:"", touched:false});
-
+    useEffect(()=>{
+        //localStorage.clear();
+        setDate({value:today(), touched:false});
+        setAvailableTime({type:"refresh", value:today()});
+    },[]);
     const getIsFormValid = () => {
         return (
             date.value.toString()!=='' &&
@@ -16,10 +39,8 @@ function BookingForm() {
             occasion.value.toString()!==''
         );
       };
-      const handleSubmit = (e) => { 
-        e.preventDefault(); 
-        setAvailableTime(time.value);
-       // alert("Done"); 
+      const handleSubmit = (e) => {
+        e.preventDefault();
         return;
       };
     return (
@@ -27,9 +48,14 @@ function BookingForm() {
         <label>
                 <span className="s-label">Choose date</span>
                 <span className="s-input">
-                    <input type="date" 
+                    <input type="date"  data-testid="booking-date" data-date-format="DD-YYYY-MM"
                             value={date.value} 
-                            onChange={(e)=>setDate({...date, value:e.target.value})}
+                            onChange={
+                                (e)=>{
+                                    setDate({...date, value:e.target.value});
+                                    setAvailableTime({type:"refresh", value:e.target.value});
+                                }
+                            }
                             onBlur={(e)=>setDate({...date, touched:true})}
                     />
                     {date.touched && date.value === '' && <span className='s-error'>Select date</span> } 
@@ -38,16 +64,19 @@ function BookingForm() {
         <label>
                 <span  className="s-label">Choose time</span>
                 <span className="s-input">
-                <select  
-                            value={time.value} 
-                            onChange={(e)=>setTime({...time, value:e.target.value})}
+                <select  value={time.value}  data-testid="booking-time"
+                            onChange={
+                                (e)=>{
+                                    setTime({...time, value:e.target.value});
+                                }
+                            }
                             onBlur={(e)=>setTime({...time, touched:true})}
                 >
-                    <option value="" key="0">---Select time---</option>
+                    <option value="" key="0"  data-testid="booking-time-option-0">---Select time---</option>
                     {
                         availableTime.map((t,index)=>{
                             return (
-                                t.free && <option value={t.time} key={index+1}>{t.time}</option>
+                                <option value={t} key={index+1}  data-testid={"booking-time-option-"+(index+1).toString()}>{t}</option>
                             )
                         })
                     }
@@ -84,7 +113,12 @@ function BookingForm() {
         </label>
 
         <div>
-        <button type="submit" disabled={!getIsFormValid()} className="button">Book Now</button>
+        <button 
+            type="submit" 
+            disabled={!getIsFormValid()} 
+            className="button"
+            onClick={(e)=>props.onSubmit({'date':date.value, 'time':time.value, 'guests':guests.value, 'occasion':occasion.value})}
+        >Book Now</button>
         </div>
         </form>
 

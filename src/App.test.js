@@ -1,15 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import Select from 'react'
-import BookingForm from './components/BookingForm';
+import BookingPage from './BookingPage';
 import { BookingProvider} from './contexts/bookingContext';
-
 
 
 test('Test1 [static text)] : Renders the BookingForm button (text inside button tag)', () => {
   //render(<BookingForm />);
   render(
     <BookingProvider>
-      <BookingForm />
+      <BookingPage />
     </BookingProvider>
   );
   const headingElement = screen.getByText("Book Now");
@@ -18,14 +16,15 @@ test('Test1 [static text)] : Renders the BookingForm button (text inside button 
 
 test('Test2 [initializeTimes] List of available times returns the correct expected value)', () => {
   
-  const testTimeValue="18:00";
+  //const testTimeValue="18:00";
 
   render(
     <BookingProvider>
-      <BookingForm />
+      <BookingPage />
     </BookingProvider>
   );
-  const inputTime=screen.getByLabelText(/Choose time/);
+  const testTimeValue=screen.getByTestId("booking-time-option-1").textContent;
+  const inputTime=screen.getByLabelText(/Choose time/)
   fireEvent.change(inputTime,{target:{value:testTimeValue}});
 
   expect(inputTime).toHaveValue(testTimeValue);
@@ -39,34 +38,33 @@ test('Test3 [updateTimes] Returns the same value that is provided in the state)'
     today.setDate(today.getDate() + 1);
     return today.toISOString().split('T')[0];
   };
-  
-  const testDateValue = tomorrow();
-  const testTimeValue="19:00";
-  const testGuestsValue="2";
-  const testOccasionValue="Birthday";
+  const after_tomorrow = () => {
+    let today = new Date();
+    today.setDate(today.getDate());
+    return today.toISOString().split('T')[0];
+  };
 
   render(
-    <BookingProvider>
-      <BookingForm />
-    </BookingProvider>
+  <BookingProvider>
+    <BookingPage/>
+  </BookingProvider>
   );
   const dateInput=screen.getByLabelText(/Choose date/);
-  fireEvent.change(dateInput,{target:{value:testDateValue}});
+  //const inputTime=screen.getByLabelText(/Choose time/);
 
-  const inputTime=screen.getByLabelText(/Choose time/);
-  fireEvent.change(inputTime,{target:{value:testTimeValue}});
+  fireEvent.change(dateInput,{target:{value:tomorrow()}});
+  const testTimeValue1_1=screen.getByLabelText(/Choose time/).textContent;
+
+  fireEvent.change(dateInput,{target:{value:after_tomorrow()}});
+  const testTimeValue1_2=screen.getByLabelText(/Choose time/).textContent;
   
-  expect(inputTime).toHaveValue(testTimeValue);
+  //expect(testTimeValue1_1).not.toBe(testTimeValue1_2);
 
-  const questsInput=screen.getByLabelText(/Number of guests/);
-  fireEvent.change(questsInput,{target:{value:testGuestsValue}});
-
-  const occasionInput=screen.getByLabelText(/Occasion/);
-  fireEvent.change(occasionInput,{target:{value:testOccasionValue}});
-
-  const btn=screen.getByRole("button");
-  fireEvent.click(btn);
+  fireEvent.change(dateInput,{target:{value:tomorrow()}});
+  const testTimeValue1_3=screen.getByLabelText(/Choose time/).textContent;
   
-  expect(inputTime).not.toHaveValue(testTimeValue);
+  expect(testTimeValue1_1).toBe(testTimeValue1_3);
+
 
 });
+

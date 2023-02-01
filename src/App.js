@@ -3,9 +3,11 @@ import './App.css';
 import Header from './components/Header';
 import Main from './Main';
 import Footer from './components/Footer';
+import { BookingProvider} from './contexts/bookingContext';
 function App() {
   return (
     <BrowserRouter>
+    <BookingProvider>
      <header>
       <Header/>
     </header>
@@ -15,6 +17,7 @@ function App() {
     <footer>
       <Footer/>
     </footer>
+    </BookingProvider>
     </BrowserRouter>
   );
 }
