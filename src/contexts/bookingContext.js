@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useReducer, useState} from "react";
+import {createContext, useContext, useReducer, useState} from "react";
 
 const BookingContext = createContext(undefined);
 
@@ -7,17 +7,14 @@ export const BookingProvider=({children}) => {
   function today() {
     const date = new Date();
     let dd = date.getDate();
-           var mm = date.getMonth() + 1; //January is 0!
-           var yyyy = date.getFullYear();
-           if (dd < 10) {
-             dd = '0' + dd;
-           }
-           if (mm < 10) {
-             mm = '0' + mm;
-           }
-           return yyyy + '-' + mm + '-' + dd;
-             //   return mm + '/' + dd + '/' +yyyy ;
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    return yyyy + '-' + mm + '-' + dd;
+        //   return mm + '/' + dd + '/' +yyyy ;
    }
+
   const seededRandom = function (seed) {
     var m = 2**35 - 31;
     var a = 185852;
@@ -62,9 +59,9 @@ export const BookingProvider=({children}) => {
       function updateTimes(state, action){
           if (action.type==='delete') {
             const new_external_tames=[];
-            state.map((t)=>{
-                if (t!==action.value) new_external_tames.push(t);
-            });
+            for (let i=0;i<state.length; i++) {
+              if (state[i]!==action.value) new_external_tames.push(state[i]);
+            }
             localStorage.setItem(selectedDate, JSON.stringify({data:new_external_tames}));
             return new_external_tames;
           } else if (action.type==='refresh') {

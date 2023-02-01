@@ -1,76 +1,69 @@
-import {useState,useEffect} from 'react';
 import { useBookingContext} from '../contexts/bookingContext';
+import { useFormik } from "formik";
+import * as Yup from 'yup';
 function BookingForm(props) {
-
 
       function today() {
         const date = new Date();
         let dd = date.getDate();
-               var mm = date.getMonth() + 1; //January is 0!
-               var yyyy = date.getFullYear();
-               if (dd < 10) {
-                 dd = '0' + dd;
-               }
-               if (mm < 10) {
-                 mm = '0' + mm;
-               }
-               return yyyy + '-' + mm + '-' + dd;
-                 //   return mm + '/' + dd + '/' +yyyy ;
+        let mm = date.getMonth() + 1; //January is 0!
+        let yyyy = date.getFullYear();
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        return yyyy + '-' + mm + '-' + dd;
+            //   return mm + '/' + dd + '/' +yyyy ;
        }
+       const { availableTime } = useBookingContext();
 
-
-    const { availableTime, setAvailableTime } = useBookingContext();
-
-    const [date, setDate] = useState({value:today(), touched:false});
-    const [time, setTime] = useState({value:"", touched:false});
-    const [guests, setGuests] = useState({value:"", touched:false});
-    const [occasion, setOccasion] = useState({value:"", touched:false});
-    useEffect(()=>{
-        //localStorage.clear();
-        setDate({value:today(), touched:false});
-        setAvailableTime({type:"refresh", value:today()});
-    },[]);
-    const getIsFormValid = () => {
-        return (
-            date.value.toString()!=='' &&
-            time.value.toString()!=='' &&
-            Number(guests.value) > 0 &&
-            Number(guests.value) <= 10 &&
-            occasion.value.toString()!==''
-        );
-      };
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        return;
-      };
+       const formik = useFormik({
+        initialValues: {
+        date: today(),
+        time: '',
+        guests: '',
+        occasion: '',
+      },
+      validationSchema: Yup.object({
+        date: Yup.string()
+            .required('Select date'),
+        time: Yup.string()
+            .required('Select time'),
+        guests: Yup.number()
+            .min(1, 'Mast be from 1 to 10')
+            .max(10, 'Mast be from 1 to 10')
+            .required('Fill in number of guests'),
+            occasion: Yup.string()
+            .required('Select occasion'),
+      }),
+      onSubmit: (values,actions) => {
+        //props.onSubmit({'date':date.value, 'time':time.value, 'guests':guests.value, 'occasion':occasion.value});
+        props.onSubmit(values);
+        actions.setSubmitting(false);
+      },
+    });
     return (
-        <form method='post' id='form_booking' onSubmit={handleSubmit}>
+        <form method='post' id='form_booking' onSubmit={formik.handleSubmit}>
         <label>
                 <span className="s-label">Choose date</span>
-                <span className="s-input">
+
+                <span className={(formik.touched.date && formik.errors.date) ? 's-input s-input-error' : 's-input'}>
                     <input type="date"  data-testid="booking-date" data-date-format="DD-YYYY-MM"
-                            value={date.value} 
-                            onChange={
-                                (e)=>{
-                                    setDate({...date, value:e.target.value});
-                                    setAvailableTime({type:"refresh", value:e.target.value});
-                                }
-                            }
-                            onBlur={(e)=>setDate({...date, touched:true})}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.date}
+                        id="date"
                     />
-                    {date.touched && date.value === '' && <span className='s-error'>Select date</span> } 
+                    <span className='s-error'>Select date</span>
                 </span>
         </label>
         <label>
                 <span  className="s-label">Choose time</span>
-                <span className="s-input">
-                <select  value={time.value}  data-testid="booking-time"
-                            onChange={
-                                (e)=>{
-                                    setTime({...time, value:e.target.value});
-                                }
-                            }
-                            onBlur={(e)=>setTime({...time, touched:true})}
+                <span className={(formik.touched.time && formik.errors.time) ? 's-input s-input-error' : 's-input'}>
+
+                <select data-testid="booking-time"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.time}
+                    id="time"
                 >
                     <option value="" key="0"  data-testid="booking-time-option-0">---Select time---</option>
                     {
@@ -81,43 +74,43 @@ function BookingForm(props) {
                         })
                     }
                 </select>
-                {time.touched && time.value.toString() === '' && <span className='s-error'>Select time</span> } 
+                <span className='s-error'>Select time</span>
                 </span>
         </label>
         <label>
                 <span className="s-label">Number of guests</span>
-                <span className="s-input">
+                <span className={(formik.touched.guests && formik.errors.guests) ? 's-input s-input-error' : 's-input'}>
                 <input 
                     type="number" placeholder="1" min="1" max="10" 
-                    value={guests.value} 
-                    onChange={(e)=>setGuests({...guests, value:e.target.value})}
-                    onBlur={(e)=>setGuests({...guests, touched:true})}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.guests}
+                    id="guests"
                 />
-                {guests.touched && (Number(guests.value)<=0 || Number(guests.value)>10) && <span className='s-error'>Mast be from 1 to 10</span> } 
+                <span className='s-error'>Mast be from 1 to 10</span>
                 </span>
         </label>
         <label>
-                <span className="s-label">Occasion {occasion.value}</span>
-                <span className="s-input">
+                <span className="s-label">Occasion</span>
+                <span  className={(formik.touched.occasion && formik.errors.occasion) ? 's-input s-input-error' : 's-input'}>
                 <select 
-                    value={occasion.value} 
-                    onChange={(e)=>setOccasion({...occasion, value:e.target.value})}
-                    onBlur={(e)=>setOccasion({...occasion, touched:true})}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.occasion}
+                    id="occasion"
                 >
                     <option value="">---Select occasion---</option>
                     <option value="Birthday">Birthday</option>
                     <option value="Anniversary">Anniversary</option>
                 </select>
-                {occasion.touched && occasion.value === '' && <span className='s-error'>Select occasion</span> } 
+                <span className='s-error'>Select occasion</span> 
                 </span>
         </label>
 
         <div>
         <button 
             type="submit" 
-            disabled={!getIsFormValid()} 
             className="button"
-            onClick={(e)=>props.onSubmit({'date':date.value, 'time':time.value, 'guests':guests.value, 'occasion':occasion.value})}
         >Book Now</button>
         </div>
         </form>

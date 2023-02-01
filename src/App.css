@@ -501,13 +501,6 @@ form#form_booking label span.s-label {
     width: 100%;
   }
 }
-form#form_booking label span.s-error {
-  color:red;
-  position: absolute;
-  left:10px;
-  bottom:-1.2rem;
-  font-size: 1rem;
-}
 form#form_booking label span.s-input {
   grid-column: 2;
   display: grid;
@@ -524,7 +517,20 @@ form#form_booking label input, form#form_booking label select {
   font-weight: 600;
  
 }
-
+form#form_booking label span.s-input-error input, form#form_booking label span.s-input-error select {
+  border: 1px solid red;
+}
+form#form_booking label span.s-error {
+  color:red;
+  position: absolute;
+  left:10px;
+  bottom:-1.2rem;
+  font-size: 1rem;
+  display: none;
+}
+form#form_booking label span.s-input-error span.s-error {
+    display: block;
+}
 .b-confirmation {
   padding:2.5rem; 
   font-size: 1.5rem;
