@@ -11,7 +11,6 @@ function Main() {
   };
 
   function sendFormData(formData) {
-    //console.log(formData);
     let submitResult=false;
     try {
       submitResult=submitAPI(formData);

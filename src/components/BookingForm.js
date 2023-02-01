@@ -36,7 +36,6 @@ function BookingForm(props) {
             .required('Select occasion'),
       }),
       onSubmit: (values,actions) => {
-        //props.onSubmit({'date':date.value, 'time':time.value, 'guests':guests.value, 'occasion':occasion.value});
         props.onSubmit(values);
         actions.setSubmitting(false);
       },
@@ -85,8 +84,8 @@ function BookingForm(props) {
         <label>
                 <span className="s-label">Number of guests</span>
                 <span className={(formik.touched.guests && formik.errors.guests) ? 's-input s-input-error' : 's-input'}>
-                <input 
-                    type="number" placeholder="1" min="1" max="10" 
+                <input
+                    type="number" placeholder="1" min="1" max="10"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.guests}

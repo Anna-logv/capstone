@@ -39,7 +39,6 @@ export const BookingProvider=({children}) => {
     return result;
 };
     function initializeTimes (){
-        //const today = (date=='') ? new Date() : date;
         const curr_list=localStorage.getItem(selectedDate);
         let external_times=[];
 
@@ -47,12 +46,9 @@ export const BookingProvider=({children}) => {
           const date=new Date(selectedDate);
           external_times=fetchAPI(date);
           localStorage.setItem(selectedDate, JSON.stringify({data:external_times}));
-          //console.log("N",external_times);
         } else {
           external_times=JSON.parse(curr_list).data;
-          //console.log("S",external_times);
         }
-        //console.log(external_times.data);
         return external_times;
       }
 
@@ -65,8 +61,6 @@ export const BookingProvider=({children}) => {
             localStorage.setItem(selectedDate, JSON.stringify({data:new_external_tames}));
             return new_external_tames;
           } else if (action.type==='refresh') {
-              //const date=new Date(action.value);
-              //console.log(action.value)
               setSelectedDate(action.value);
               return initializeTimes();
           }
