@@ -4,7 +4,7 @@ import Nav from './Nav';
 function Header() {
     return (
         <div className="main-block">
-            <Link to="/"><img src={Logo} alt="Little Lemon"/></Link>
+            <Link to="/"><img src={Logo} alt="Little Lemon" /></Link>
             <nav><Nav/></nav>
         </div>
     );

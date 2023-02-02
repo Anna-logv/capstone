@@ -38,16 +38,18 @@ export const BookingProvider=({children}) => {
     }
     return result;
 };
-    function initializeTimes (){
-        const curr_list=localStorage.getItem(selectedDate);
+    function initializeTimes (date_selected){
+        const curr_list=localStorage.getItem(date_selected);
         let external_times=[];
 
         if (!curr_list) {
-          const date=new Date(selectedDate);
+          const date=new Date(date_selected);
           external_times=fetchAPI(date);
-          localStorage.setItem(selectedDate, JSON.stringify({data:external_times}));
+          //console.log('N', date_selected, external_times);
+          localStorage.setItem(date_selected, JSON.stringify({data:external_times}));
         } else {
           external_times=JSON.parse(curr_list).data;
+          //console.log('S', date_selected, external_times);
         }
         return external_times;
       }
@@ -62,13 +64,15 @@ export const BookingProvider=({children}) => {
             return new_external_tames;
           } else if (action.type==='refresh') {
               setSelectedDate(action.value);
-              return initializeTimes();
+              //console.log('reinit date - '+action.value);
+              return initializeTimes(action.value);
           }
 
       }
 
     const [selectedDate, setSelectedDate] = useState(today());
-    const [availableTime, setAvailableTimeProvider] = useReducer(updateTimes,[], initializeTimes);
+    const init_timelist=initializeTimes(today());
+    const [availableTime, setAvailableTimeProvider] = useReducer(updateTimes, init_timelist);
 
     return (
         <BookingContext.Provider

@@ -88,7 +88,8 @@ test('Test3 [updateTimes] Returns the same value that is provided in the state)'
   const testTimeValue1_3=screen.getByLabelText(/Choose time/).textContent;
   expect( testTimeValue1_1).toBe(testTimeValue1_3);
 });
-q
+
+
 test('Test4 [Validation] date field)', async  () => {
   await act(() => {
       render(

@@ -40,6 +40,7 @@ function BookingForm(props) {
         actions.setSubmitting(false);
       },
     });
+
     return (
         <form method='post' id='form_booking' onSubmit={formik.handleSubmit}>
         <label htmlFor='date' data-testid="booking-date-label">
@@ -48,8 +49,8 @@ function BookingForm(props) {
                 <span className={(formik.touched.date && formik.errors.date) ? 's-input s-input-error' : 's-input'}>
                     <input type="date"  data-testid="booking-date" data-date-format="DD-YYYY-MM"
                         onChange={ (e) => {
-                                setAvailableTime({type:'refresh', value:formik.values.date});
                                 formik.handleChange(e);
+                                setAvailableTime({type:'refresh', value:e.target.value});
                               }
                         }
                         onBlur={formik.handleBlur}
@@ -114,6 +115,7 @@ function BookingForm(props) {
 
         <div>
         <button 
+            aria-label="On Click"
             type="submit" 
             className="button"
         >Book Now</button>
