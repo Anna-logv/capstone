@@ -42,7 +42,7 @@ function BookingForm(props) {
     });
     return (
         <form method='post' id='form_booking' onSubmit={formik.handleSubmit}>
-        <label>
+        <label htmlFor='date' data-testid="booking-date-label">
                 <span className="s-label">Choose date</span>
 
                 <span className={(formik.touched.date && formik.errors.date) ? 's-input s-input-error' : 's-input'}>
@@ -56,10 +56,10 @@ function BookingForm(props) {
                         value={formik.values.date}
                         id="date"
                     />
-                    <span className='s-error'>{formik.errors.date}</span>
+                    {(formik.touched.date && formik.errors.date) && <span className='s-error'>{formik.errors.date}</span>}
                 </span>
         </label>
-        <label>
+        <label htmlFor='time'  data-testid="booking-time-label">
                 <span  className="s-label">Choose time</span>
                 <span className={(formik.touched.time && formik.errors.time) ? 's-input s-input-error' : 's-input'}>
 
@@ -78,36 +78,37 @@ function BookingForm(props) {
                         })
                     }
                 </select>
-                <span className='s-error'>{formik.errors.time}</span>
+                {(formik.touched.time && formik.errors.time) && <span className='s-error'>{formik.errors.time}</span>}
                 </span>
         </label>
-        <label>
+        <label htmlFor='guests' data-testid="booking-guests-label">
                 <span className="s-label">Number of guests</span>
                 <span className={(formik.touched.guests && formik.errors.guests) ? 's-input s-input-error' : 's-input'}>
                 <input
-                    type="number" placeholder="1" min="1" max="10"
+                    type="number" placeholder="1" min="1" max="10"  data-testid="booking-guests"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.guests}
                     id="guests"
                 />
-                <span className='s-error'>{formik.errors.guests}</span>
+                {(formik.touched.guests && formik.errors.guests) && <span className='s-error'>{formik.errors.guests}</span>}
                 </span>
         </label>
-        <label>
+        <label htmlFor='occasion' data-testid="booking-occasion-label">
                 <span className="s-label">Occasion</span>
                 <span  className={(formik.touched.occasion && formik.errors.occasion) ? 's-input s-input-error' : 's-input'}>
                 <select 
+                     data-testid="booking-occasion"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.occasion}
                     id="occasion"
                 >
-                    <option value="">---Select occasion---</option>
-                    <option value="Birthday">Birthday</option>
-                    <option value="Anniversary">Anniversary</option>
+                    <option data-testid="occasion-option-0" value="">---Select occasion---</option>
+                    <option data-testid="occasion-option-1" value="Birthday">Birthday</option>
+                    <option data-testid="occasion-option-2" value="Anniversary">Anniversary</option>
                 </select>
-                <span className='s-error'>{formik.errors.occasion}</span> 
+                {(formik.touched.guests && formik.errors.occasion) && <span className='s-error'>{formik.errors.occasion}</span> }
                 </span>
         </label>
 

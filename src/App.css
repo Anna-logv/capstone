@@ -526,11 +526,8 @@ form#form_booking label span.s-error {
   left:10px;
   bottom:-1.2rem;
   font-size: 1rem;
-  display: none;
 }
-form#form_booking label span.s-input-error span.s-error {
-    display: block;
-}
+
 .b-confirmation {
   padding:2.5rem; 
   font-size: 1.5rem;
